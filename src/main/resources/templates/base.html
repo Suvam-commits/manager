@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="parent(content,title,script)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-replace="${title}">base page</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}">
+    <link rel="stylesheet" data-th-href="@{'/css/style.css'}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body class="dark:bg-gray-700 dark:text-white">
+    <!-- common header -->
+
+    <!-- When user is logged in:navbar -->
+    <div data-th-if="${loggedInUser}">
+        <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
+    </div>
+
+
+    <!-- When user us not logged in:navbar -->
+    <div data-th-unless="${loggedInUser}">
+        <div data-th-replace="~{navbar::navbar}"></div>
+    </div>
+    <!-- main content -->
+     <div  class="p-4 ">
+        <section data-th-replace="${content}"></section>
+     </div>
+     <!-- common footer -->
+        <!-- <footer class="p-4">Create SCM</footer> -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script data-th-src="@{'/js/script.js'}"></script>
+    <th:block data-th-replace="${script}"></th:block>
+</body>
+
+</html>
